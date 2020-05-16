@@ -35,11 +35,9 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
         //Intilization
         getIdButton = (Button) findViewById(R.id.button2);
         studentIdField = (TextView) findViewById(R.id.editText4);
-
         setStudentId = (TextView) findViewById(R.id.editText5);
         setStudentName = (TextView) findViewById(R.id.editText6);
         setStudentCourse = (TextView) findViewById(R.id.editText7);
-
         getIdButton.setOnClickListener(this);
     }
 
@@ -47,18 +45,17 @@ public class MainActivity extends AppCompatActivity  implements View.OnClickList
     public void onClick(View v) {
         studentId = studentIdField.getText().toString();
         try {
-            getCallStudent();
-            Toast.makeText(MainActivity.this,"getting data for studentId: "+studentId,Toast.LENGTH_LONG).show();
-
+            if (studentId.matches( "[0-9]+") && studentId.length() >= 1){
+                Toast.makeText(MainActivity.this, "Searching data for studentId: " + studentId, Toast.LENGTH_LONG).show();
+                getCallStudent();
+            }
+            else {
+                Toast.makeText(MainActivity.this, "Please provide a valid entry for studentId", Toast.LENGTH_LONG).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
-    public  static String Hola(){
-        return "Hola";
-    }
-
 
     public void getCallStudent() throws Exception{
 
